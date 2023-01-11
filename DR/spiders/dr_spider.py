@@ -61,7 +61,20 @@ class Book():
         df.drop(["Yayinevi","Yazar","Fiyat"], axis=1, inplace=True)
         df = df.sort_index()  
 
+        kitap_adi_listmax = max([len(str(book.kitap_adi.strip())) for book in myBookList])
+        yazar_listmax = max([len(str(book.yazar.strip())) for book in myBookList])
+        yayinevi_listmax = max([len(str(book.yayinevi.strip())) for book in myBookList])
+        fiyat_listmax = max([len(str(book.fiyat.strip())) for book in myBookList])
+        writer = pd.ExcelWriter("Dr3.xlsx", engine="openpyxl")
+        df.to_excel(writer, sheet_name="Sheet1", index=True, encoding="utf-8-sig")
+        sheet = writer.sheets["Sheet1"]
+        sheet.column_dimensions["A"].width = yayinevi_listmax
+        sheet.column_dimensions["B"].width = yazar_listmax
+        sheet.column_dimensions["C"].width = fiyat_listmax
+        sheet.column_dimensions["D"].width = kitap_adi_listmax
+        writer.save()
 
-        df.to_excel("Dr.xlsx", index=True, encoding="utf-8-sig")
+
+        # df.to_excel("Dr.xlsx", index=True, encoding="utf-8-sig")
 
 
