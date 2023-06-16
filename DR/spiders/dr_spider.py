@@ -5,7 +5,7 @@ class DrSpider(scrapy.Spider):
     name = "dr_spider"
 
     start_urls = [
-        "https://www.dr.com.tr/kategori/Kitap/Ders-Sinav-Kitaplari/Universite-Ders-Kitaplari/Tip/grupno=10000070/?Page=1&Manufacturer[0]=Güneş%20Tıp%20Kitabevleri",
+        "https://www.dr.com.tr/kategori/ayt-matematik-2/",
     ]
 
 
@@ -65,7 +65,7 @@ class Book():
         yazar_listmax = max([len(str(book.yazar.strip())) for book in myBookList])
         yayinevi_listmax = max([len(str(book.yayinevi.strip())) for book in myBookList])
         fiyat_listmax = max([len(str(book.fiyat.strip())) for book in myBookList])
-        writer = pd.ExcelWriter("Dr3.xlsx", engine="openpyxl")
+        writer = pd.ExcelWriter("Dr.xlsx", engine="openpyxl")
         df.to_excel(writer, sheet_name="Sheet1", index=True, encoding="utf-8-sig")
         sheet = writer.sheets["Sheet1"]
         sheet.column_dimensions["A"].width = yayinevi_listmax
